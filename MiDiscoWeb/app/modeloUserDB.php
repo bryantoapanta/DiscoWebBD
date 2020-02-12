@@ -12,6 +12,7 @@ class ModeloUserDB {
     private static $add_usuario = "INSERT INTO usuarios (id, clave, nombre, email, plan, estado) VALUES (?, ?, ?, ?, ?, ?)";
     private static $modificar_usuario = "Update usuarios set clave = ? , nombre = ? , email = ? ,
                                             plan = ? , estado = ? where id = ?";
+    private static $obtenerdatosModificar="select * from usuarios where id= ?";
     
     
     public static function init(){
@@ -196,10 +197,16 @@ class ModeloUserDB {
     }
     
     // Actualizar un nuevo usuario (boolean)
-    public static function UserUpdate ($userid, $userdat){
-        
-        
-        return false;
+    public static function UserUpdate ($userid, $userdat):bool{
+        $stmt = self::$dbh->prepare(self::$modificar_usuario);
+        $stmt->bindValue(1,$userdat[0]);
+        $stmt->bindValue(2,$userdat[1]);
+        $stmt->bindValue(3,$userdat[2]);
+        $stmt->bindValue(4,$userdat[3]);
+        $stmt->bindValue(5,$userdat[4]);
+        $stmt->bindValue(6,$userid);
+        $stmt->execute();
+        return true;
     }
     
     
@@ -220,6 +227,28 @@ class ModeloUserDB {
                 ESTADOS[$fila['estado']]
             ];
             $tUserVista[$fila['id']] = $datosuser;
+        }
+        return $tUserVista;
+    }
+    
+    public static function GetAllModificar ($id):array{
+        // Genero los datos para la vista que no muestra la contraseña ni los códigos de estado o plan
+        // sino su traducción a texto  PLANES[$fila['plan']],
+        echo $id;
+        $stmt = self::$dbh->prepare(self::$obtenerdatosModificar);
+        $stmt->bindValue(1,$id);
+        $tUserVista = [];
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        while ( $fila = $stmt->fetch()){
+            $datosuser = [
+                $fila["clave"],
+                $fila['nombre'],
+                $fila['email'],
+                PLANES[$fila['plan']],
+                ESTADOS[$fila['estado']]
+            ];
+            $tUserVista = $datosuser;
         }
         return $tUserVista;
     }

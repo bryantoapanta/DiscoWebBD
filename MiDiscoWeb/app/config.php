@@ -12,7 +12,7 @@ define('RUTA_UBUNTU', "/home/alummo2019-20/Escritorio/prueba/");
 define('RUTA_WINDOWS',"C:\Users\Bryan\Desktop\Prueba\\");
 
 // (0-BÃ¡sico |1-Profesional |2- Premium| 3- MÃ¡ster)
-const  PLANES = ['BÃ¡sico','Profesional','Premium','MÃ¡ster'];
+const  PLANES = ['B�sico','Profesional','Premium','M�ster'];
 //  Estado: (A-Activo | B-Bloqueado |I-Inactivo )
 const  ESTADOS = ['A' => 'Activo','B' =>'Bloqueado', 'I' => 'Inactivo']; 
 

@@ -27,9 +27,9 @@ function ctlUserInicio()
                 echo "<br>tipo usuario=". $_SESSION['tipouser']."<br>";
                 echo $user;
                 if ($user == "admin") { // si el usuario es administrador tendra acceso a la pagina
-                    $_SESSION['tipouser'] =0;
-                   // if ($_SESSION['tipouser'] == "Máster")
-                        if ($_SESSION['tipouser'] == 0)
+                    //$_SESSION['tipouser'] =0;
+                   if ($_SESSION['tipouser'] == "M�ster")
+                       // if ($_SESSION['tipouser'] == 0)
                     {
                         echo "estas en gestion usuarios" ;
                         $_SESSION['modo'] = GESTIONUSUARIOS;
@@ -171,6 +171,7 @@ function ctlUserModificar()
             ];
             
             //  if (cumplecontra($_POST["clave1"], $_POST["clave2"],$_POST["iduser"],$_POST["email"])) {
+            $modificado[0]=Cifrador::cifrar($modificado[0]);
             if (ModeloUserDB::UserUpdate($id, $modificado)) {
                 $msg = "El usuario fue modificado con éxito";
                 //  }
@@ -183,7 +184,8 @@ function ctlUserModificar()
         
         //al pulsar en modificar le paso el id, con ese id sacamos los datos del id(usuario) para, que luego se mostraran a la hora de modificar
         $user = $_GET['id'];
-        $datosusuario = $_SESSION["tusuarios"][$user];
+        $datosusuario = modelouserdb::GetAllModificar($user);
+        
         $clave = $datosusuario[0];
         $nombre = $datosusuario[1];
         $mail = $datosusuario[2];

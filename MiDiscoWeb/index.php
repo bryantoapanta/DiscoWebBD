@@ -11,6 +11,7 @@ modeloUserInit();
 ModeloUserDB::init();
 $msg="";
 
+
 // Enrutamiento
 // Relación entre peticiones y función que la va a tratar
 // Versión sin POO no manejo de Clases ni objetos
