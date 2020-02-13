@@ -8,6 +8,7 @@ class ModeloUserDB {
     private static $dbh = null;
     private static $consulta_user = "Select * from usuarios where id = ?";
     private static $consulta_email = "Select * from usuarios where email = ?";
+    private static $consulta_emailAntiguo = "Select email from usuarios where id = ?";
     private static $borrar_usuario = "Delete from usuarios where id = ?";
     private static $add_usuario = "INSERT INTO usuarios (id, clave, nombre, email, plan, estado) VALUES (?, ?, ?, ?, ?, ?)";
     private static $modificar_usuario = "Update usuarios set clave = ? , nombre = ? , email = ? ,
@@ -16,6 +17,7 @@ class ModeloUserDB {
     
     
     public static function init(){
+        
         
         if (self::$dbh == null){
             try {
@@ -52,7 +54,7 @@ class ModeloUserDB {
     }
     
     // Comprueba si ya existe un usuario con ese identificar
-    public static function existeID(String $user):bool{
+    public static function ExisteID(String $user):bool{
         $stmt = self::$dbh->prepare(self::$consulta_user);
         $stmt->bindValue(1,$user);
         $stmt->execute();
@@ -75,28 +77,46 @@ class ModeloUserDB {
         }
     }
     
+    public static function getEmail(String $user):string{
+        $stmt = self::$dbh->prepare(self::$consulta_emailAntiguo);
+        $stmt->bindValue(1,$user);
+        $stmt->execute();
+       
+        if ($stmt->rowCount() == 0 ){
+            return false;
+        }else{
+            //CREAMOS UN ARRAY ASOCIATIVO PARA LUEGO PODER OBTENER EL EMAIL
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $fila = $stmt->fetch();
+            $email = $fila['email'];
+            echo $email;
+            return $email;
+            }
+        }
+    
     
     /*
      * Chequea si hay error en el datos antes de guardarlos
      */
     public static function errorValoresAlta ($user,$clave1, $clave2, $nombre, $email, $plan, $estado){
-        if ( modeloExisteID($user))                         return TMENSAJES['USREXIST'];
+        if ( self::ExisteID($user))                         return TMENSAJES['USREXIST'];
         if ( preg_match("/^[a-zA-Z0-9]+$/", $user) == 0)    return TMENSAJES['USRERROR'];
         if ( $clave1 != $clave2 )                           return TMENSAJES['PASSDIST'];
-        if ( !modeloEsClaveSegura($clave1) )                return TMENSAJES['PASSEASY'];
+        if ( !self::EsClaveSegura($clave1) )                return TMENSAJES['PASSEASY'];
         if ( !filter_var($email, FILTER_VALIDATE_EMAIL))    return TMENSAJES['MAILERROR'];
-        if ( modeloExisteEmail($email))                     return TMENSAJES['MAILREPE'];
+        if ( self::ExisteEmail($email))                     return TMENSAJES['MAILREPE'];
         return false;
     }
     
     public static function errorValoresModificar($user, $clave1, $clave2, $nombre, $email, $plan, $estado){
         
         if ( $clave1 != $clave2 )                           return TMENSAJES['PASSDIST'];
-        if ( !modeloEsClaveSegura($clave1) )                return TMENSAJES['PASSEASY'];
+        if ( !self::EsClaveSegura($clave1) )                return TMENSAJES['PASSEASY'];
         if ( !filter_var($email, FILTER_VALIDATE_EMAIL))    return TMENSAJES['MAILERROR'];
         // SI se cambia el email
-        $emailantiguo = modeloGetEmail($user);
-        if ( $email != $emailantiguo && modeloExisteEmail($email))   return TMENSAJES['MAILREPE'];
+        $emailantiguo = self::GetEmail($user);
+        echo $emailantiguo ."-".$email;
+        if ( $email != $emailantiguo && self::ExisteEmail($email))   return TMENSAJES['MAILREPE'];
         return false;
     }
     
@@ -107,9 +127,9 @@ class ModeloUserDB {
     public static function EsClaveSegura (String $clave):bool {
         if ( empty($clave))         return false;
         if (  strlen($clave) < 8 )  return false;
-        if ( !hayMayusculas($clave) || !hayMinusculas($clave)) return false;
-        if ( !hayDigito($clave))         return false;
-        if ( !hayNoAlfanumerico($clave)) return false;
+        if ( !self::hayMayusculas($clave) || !self::hayMinusculas($clave)) return false;
+        if ( !self::hayDigito($clave))         return false;
+        if ( !self::hayNoAlfanumerico($clave)) return false;
         
         return true;
     }

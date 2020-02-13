@@ -36,18 +36,18 @@ ob_start();
 			<tr>
 				<td>Plan</td>
 				<td><select name="plan">
-						<option value="0" <?= ($plan==0)?"selected=\"selected\"":""; ?>>Básico</option>
-						<option value="1" <?= ($plan==1)?"selected=\"selected\"":""; ?>>Profesional</option>
-						<option value="2" <?= ($plan==2)?"selected=\"selected\"":""; ?>>Premium</option>
-						<option value="3" <?= ($plan==3)?"selected=\"selected\"":""; ?>>Máster</option>
+						<option value="0" <?= ($plan==PLANES[0])?"selected=\"selected\"":""; ?>>Básico</option>
+						<option value="1" <?= ($plan==PLANES[1])?"selected=\"selected\"":""; ?>>Profesional</option>
+						<option value="2" <?= ($plan==PLANES[2])?"selected=\"selected\"":""; ?>>Premium</option>
+						<option value="3" <?= ($plan==PLANES[3])?"selected=\"selected\"":""; ?>>Máster</option>
 				</select></td>
 			</tr>
 			<tr>
 				<td>Estado</td>
 				<td><select name="estado">
-						<option value="A" <?= ($estado=="A")?"selected=\"selected\"":""; ?>>Activo</option>
-						<option value="I" <?= ($estado=="I")?"selected=\"selected\"":""; ?>>Inactivo</option>
-						<option value="B" <?= ($estado=="B")?"selected=\"selected\"":""; ?>>Bloqueado</option>
+						<option value="A" <?= ($estado==ESTADOS["A"])?"selected=\"selected\"":""; ?>>Activo</option>
+						<option value="I" <?= ($estado==ESTADOS["I"])?"selected=\"selected\"":""; ?>>Inactivo</option>
+						<option value="B" <?= ($estado==ESTADOS["B"])?"selected=\"selected\"":""; ?>>Bloqueado</option>
 
 				</select></td>
 			</tr>

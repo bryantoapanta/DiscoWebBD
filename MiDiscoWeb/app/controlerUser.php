@@ -3,7 +3,7 @@
 // Controlador que realiza la gestión de usuarios
 // ------------------------------------------------
 include_once 'config.php';
-//include_once 'modeloUser.php';
+// include_once 'modeloUser.php';
 include_once 'modeloUserDB.php';
 
 /*
@@ -21,17 +21,17 @@ function ctlUserInicio()
             echo "antes de ok";
             if (ModeloUserDB::modeloOkUser($user, $clave)) {
                 echo "despues de ok";
-                
+
                 $_SESSION['user'] = $user;
                 $_SESSION['tipouser'] = ModeloUserDB::ObtenerTipo($user);
-                echo "<br>tipo usuario=". $_SESSION['tipouser']."<br>";
+                echo "<br>tipo usuario=" . $_SESSION['tipouser'] . "<br>";
                 echo $user;
                 if ($user == "admin") { // si el usuario es administrador tendra acceso a la pagina
-                    //$_SESSION['tipouser'] =0;
-                   if ($_SESSION['tipouser'] == "M�ster")
-                       // if ($_SESSION['tipouser'] == 0)
+                                        // $_SESSION['tipouser'] =0;
+                    if ($_SESSION['tipouser'] == "M�ster") 
+                    // if ($_SESSION['tipouser'] == 0)
                     {
-                        echo "estas en gestion usuarios" ;
+                        echo "estas en gestion usuarios";
                         $_SESSION['modo'] = GESTIONUSUARIOS;
                         header('Location:index.php?orden=VerUsuarios');
                     }
@@ -48,10 +48,10 @@ function ctlUserInicio()
             }
         }
     }
-    
-    if (isset($_GET['orden']) == "AltaUser"){
+
+    if (isset($_GET['orden']) == "AltaUser") {
         // La orden tiene una funcion asociada
-        $procRuta =  "ctlUserAltaUser";
+        $procRuta = "ctlUserAltaUser";
     }
     include_once 'plantilla/facceso.php';
 }
@@ -61,7 +61,7 @@ function ctlUserCerrar()
 {
     session_destroy();
     ModeloUserDB::closeDB();
-   // modeloUserSave();
+    // modeloUserSave();
     header('Location:index.php');
 }
 
@@ -83,10 +83,11 @@ function ctlUserBorrar()
     } else {
         $msg = "No se pudo borrar el usuario.";
     }
-    //modeloUserSave();
+    // modeloUserSave();
     ctlUserVerUsuarios($msg);
 }
 
+// errorValoresAlta ($user,$clave1, $clave2, $nombre, $email, $plan, $estado)
 function ctlUserAlta()
 {
     if (! isset($_POST["iduser"])) {
@@ -105,21 +106,27 @@ function ctlUserAlta()
         echo $id;
         var_dump($data);
         // modeloUserAdd($id, $data);
-        if (cumplerequisitos($_POST["clave1"], $_POST["clave2"],$_POST["iduser"],$_POST["email"],$msg)) {
-            //cifrar clave
-            $data[0]=Cifrador::cifrar($data[0]);
+
+        // cifrar clave
+        if (! ModeloUserDB::errorValoresAlta($id, $data[0], $_POST["clave2"], $data[1], $data[2], $data[3], $data[4])) {
+            echo "Esta en a�adir";
+            $data[0] = Cifrador::cifrar($data[0]);
             if (ModeloUserDB::UserAdd($id, $data)) {
                 $msg = "El usuario fue creado con éxito";
+            } else {
+                $msg .= "<br>El usuario no fue creado";
+                include_once "plantilla/fnuevoAdmin.php";
             }
-        } else {
-            $msg .="<br>El usuario no fue creado";
-            include_once "plantilla/fnuevoAdmin.php";
         }
-       // modeloUserSave();
+        else {
+            $msg = "El usuario no fue creado";
+        }
+        // modeloUserSave();
         ctlUserVerUsuarios($msg);
     }
 }
 
+// ALTA USUARIO A TRAVES DE INICIO
 function ctlUserAltaUser()
 {
     if (! isset($_POST["iduser"])) {
@@ -137,15 +144,19 @@ function ctlUserAltaUser()
         ];
         echo $id;
         var_dump($data);
-        // modeloUserAdd($id, $data);
-        if (cumplerequisitos($_POST["clave1"], $_POST["clave2"],$_POST["iduser"],$_POST["email"],$msg)) {
+        // SI NO HAY ERRORES
+        if (! ModeloUserDB::errorValoresAlta($id, $data[0], $_POST["clave2"], $data[1], $data[2], $data[3], $data[4])) {
+            $data[0] = Cifrador::cifrar($data[0]);
             if (ModeloUserDB::UserAdd($id, $data)) {
-                $msg = "El usuario fue creado con éxito";
+                echo $msg = "El usuario fue creado con éxito";
+            } else {
+                $msg = "El usuario no fue creado";
             }
-        } else {
+        }
+        else {
             $msg = "El usuario no fue creado";
         }
-        //modeloUserSave();
+        // modeloUserSave();
         ctlUserInicio();
     }
 }
@@ -153,7 +164,7 @@ function ctlUserAltaUser()
 function ctlUserModificar()
 {
     $msg = "";
-    
+
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['clave1']) && isset($_POST['email']) && isset($_POST['estado']) && isset($_POST['nombre']) && isset($_POST['plan'])) {
             $id = $_POST['iduser'];
@@ -162,38 +173,39 @@ function ctlUserModificar()
             $mail = $_POST['email'];
             $plan = $_POST['plan'];
             $estado = $_POST['estado'];
-            $modificado = [
+            $data = [
                 $clave,
                 $nombre,
                 $mail,
                 $plan,
                 $estado
             ];
-            
-            //  if (cumplecontra($_POST["clave1"], $_POST["clave2"],$_POST["iduser"],$_POST["email"])) {
-            $modificado[0]=Cifrador::cifrar($modificado[0]);
-            if (ModeloUserDB::UserUpdate($id, $modificado)) {
-                $msg = "El usuario fue modificado con éxito";
-                //  }
-            }
-            else {
+            // SI NO HAY ERRORES
+            if (! ModeloUserDB::errorValoresModificar($id, $data[0], $_POST["clave2"], $data[1], $data[2], $data[3], $data[4])) {
+                $data[0] = Cifrador::cifrar($data[0]);
+                if (ModeloUserDB::UserUpdate($id, $data)) {
+                    $msg = "El usuario fue modificado con éxito";
+                } else {
+                    $msg = "El usuario no pudo ser modificado";
+                }
+            } else {
                 $msg = "El usuario no pudo ser modificado";
             }
         }
     } else {
-        
-        //al pulsar en modificar le paso el id, con ese id sacamos los datos del id(usuario) para, que luego se mostraran a la hora de modificar
+
+        // al pulsar en modificar le paso el id, con ese id sacamos los datos del id(usuario) para, que luego se mostraran a la hora de modificar
         $user = $_GET['id'];
         $datosusuario = modelouserdb::GetAllModificar($user);
-        
+
         $clave = $datosusuario[0];
         $nombre = $datosusuario[1];
         $mail = $datosusuario[2];
         $plan = $datosusuario[3];
         $estado = $datosusuario[4];
-        include_once 'plantilla/fmodificar.php';
+        echo $estado . include_once 'plantilla/fmodificar.php';
     }
-    //modeloUserSave();
+    
     ctlUserVerUsuarios($msg);
 }
 

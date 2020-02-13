@@ -27,11 +27,11 @@ ob_start();
 			</tr>
 			<tr>
 				<td>Contraseña</td>
-				<td><input type="text" name="clave1" value="<?= $clave ?>"></td>
+				<td><input type="password" name="clave1" value="<?= $clave ?>"></td>
 			</tr>
 			<tr>
 				<td>Repetir contraseña</td>
-				<td><input type="text" name="clave2" value="<?= $clave ?>"></td>
+				<td><input type="password" name="clave2" value="<?= $clave ?>"></td>
 			</tr>
 			<tr>
 				<td>Plan</td>

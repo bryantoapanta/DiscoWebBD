@@ -34,7 +34,7 @@ define ('DBPASSWORD','');
 //define('FILEUSERSEGUR','app/dat/usuariossegur.json');
 // Ruta donde se guardan los archivos de los usuarios
 // Tiene que tener permiso 777 o permitir cambiar a usuario Apache
-//define('RUTA_FICHEROS','app/dat');
+define('RUTA_FICHEROS','app/almacenamiento');
 //  Estado: (A-Activo | B-Bloqueado |I-Inactivo )
 //const  ESTADOS = ['A' => 'Activo','B' =>'Bloqueado', 'I' => 'Inactivo'];
 

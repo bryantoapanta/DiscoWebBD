@@ -40,7 +40,7 @@ $auto = $_SERVER['PHP_SELF'];
 			<?php endfor;?>
 			<td class="borrador"  ><a href="#" onclick="confirmarBorrarfichero('<?= $datosusuario[0]."','".$clave."'"?>);">&#9760;&#9851;</a></td>
 			<td class="modificacion"><a href="#" onclick="confirmarRenombrarfichero('<?= $datosusuario[0]."','".$clave."'"?>);">&#9998;</a></td>
-			<td class="detalle"><a href="<?= $auto?>?operacion=Descargar&id=<?= $clave?>">Descargar</a></td>
+			<td class="detalle"><a href="<?= $auto?>?operacion=Descargar&id=<?= $datosusuario[0]?>">Descargar</a></td>
 		</tr>
 <?php endforeach; ?>
 </table>
