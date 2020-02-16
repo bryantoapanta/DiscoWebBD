@@ -1,0 +1,421 @@
+@font-face {
+    font-family: aero;
+    src: url(fuentes/Aero.ttf)
+}
+
+@font-face {
+    font-family: ea;
+    src: url(fuentes/EA.ttf)
+}
+
+@font-face {
+    font-family: sanssolid;
+    src: url(fuentes/SolidSans.ttf)
+}
+
+
+body {
+    background: silver;
+    text-align: justify;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    color: #757E82;
+}
+
+#container {
+    margin: 0 auto;
+    width: 95%;
+    background: #fff;
+    border: solid 1px;
+    border-radius: 7px;
+}
+
+#header {
+    background: black;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+#header h1 {
+    font-size: 24px;
+    margin: 0;
+    font-family: "aero", sans-serif;
+}
+
+#header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+#content {
+    background: white;
+    clear: left;
+    padding: 20px;
+}
+
+#content h2 {
+    color: #000;
+    font-size: 160%;
+    margin: 0 0 .5em;
+}
+
+#aviso {
+    background: white;
+    color: red;
+}
+
+li {
+    padding: 18px;
+}
+
+
+
+a {
+    color: #429;
+    text-decoration: none;
+}
+
+textarea {
+    resize: none;
+}
+
+table,
+th,
+td,tr {
+    font-family: 'sanssolid', sans-serif;
+    color: #9C9C9C;
+    border: 22px solid #757E82;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+#verusuarios th, td{
+	font-size: 0.73em;
+}
+
+#verusuarios .ocultos{
+	display: none;
+}
+
+
+#footer {
+    color: white;
+    background: blue;
+    text-align: center;
+    padding: 20px;
+    margin: 0px;
+    height: 1%;
+}
+
+#fmodificar,
+#fmodificar td,
+#fmodificar tr {
+    border: none;
+}
+
+#fmodificar td > input{
+   width: 100%;
+}
+
+input {
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 30vw;
+}
+
+td input{
+     width: 35vw;
+}
+
+#facceso,
+#facceso tr,
+#facceso td,
+#facceso th {
+    border: none;
+    font-size: 1.1em;
+}
+
+#fnuevo,
+#fnuevo td,
+#fnuevo tr {
+    border: none;
+}
+
+#verusuarios,
+#verusuarios td,
+#verusuarios tr,
+#verusuarios th {
+    border: 1px solid #757E82;
+}
+
+
+body {
+    background-image: linear-gradient(#00FFCC, white);
+    background-image: cover;
+}
+
+h1 {
+
+    color: #FFFFFF;
+}
+
+#header {
+    background-image: linear-gradient(hsl(212, 70%, 50%), white);
+    border-radius: 8px 8px 0px 0px;
+}
+
+#content {
+    
+
+    border-radius: 8px 8px 0px 0px;
+}
+
+/*Error*/
+#aviso {
+    background: #F84B4B;
+    color: #FFFFFF;
+    text-align: center;
+    margin-right: 30vw;
+    margin-left: 30vw;
+    border-radius: 8px 8px 8px 8px;
+
+
+}
+
+.paginas {
+    color: #757E82;
+    font-family: "sanssolid", sans-serif;
+}
+
+div {
+    border: none;
+}
+
+#container {
+    border: none;
+}
+
+#autores {
+    text-align: center;
+    color: #757E82;
+    font-size: 0.01;
+}
+
+
+td{
+   font-size: 0.5em;
+}
+
+/*************************************************************************************************************************/
+/*************************************************************************************************************************/
+/******************************************R-U-P-T-U-R-A******************************************************************/
+/*************************************************************************************************************************/
+/*************************************************************************************************************************/
+
+@media (min-width: 760px) {
+
+@font-face {
+    font-family: aero;
+    src: url(fuentes/Aero.ttf)
+}
+
+@font-face {
+    font-family: ea;
+    src: url(fuentes/EA.ttf)
+}
+
+@font-face {
+    font-family: sanssolid;
+    src: url(fuentes/SolidSans.ttf)
+}
+
+
+body {
+    background: silver;
+    text-align: justify;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    color: #757E82;
+}
+
+#container {
+    margin: 0 auto;
+    width: 87%;
+    background: #fff;
+    border: solid 1px;
+    border-radius: 9px;
+}
+
+#header {
+    background: black;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+#header h1 {
+    font-size: 24px;
+    margin: 0;
+    font-family: "aero", sans-serif;
+}
+
+#header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+#content {
+
+    background: white;
+    clear: left;
+    padding: 20px;
+
+}
+
+#content h2 {
+    color: #000;
+    font-size: 160%;
+    margin: 0 0 .5em;
+}
+
+#aviso {
+    background: white;
+    color: red;
+}
+
+li {
+    padding: 18px;
+}
+
+
+
+a {
+    color: #429;
+    text-decoration: none;
+}
+
+textarea {
+    resize: none;
+}
+
+table,
+th,
+td {
+    font-family: 'sanssolid', sans-serif;
+    color: #9C9C9C;
+    border: 1px solid #757E82;
+    border-collapse: collapse;
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+#footer {
+    color: white;
+    background: blue;
+    text-align: center;
+    padding: 20px;
+    margin: 0px;
+    height: 1%;
+}
+
+#fmodificar,
+#fmodificar td,
+#fmodificar tr {
+    border: none;
+}
+
+input {
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 10vw;
+}
+
+#facceso,
+#facceso tr,
+#facceso td,
+#facceso th {
+    border: none;
+    font-size: 1.1em;
+}
+
+#fnuevo,
+#fnuevo td,
+#fnuevo tr {
+    border: none;
+}
+
+#verusuarios,
+#verusuarios td,
+#verusuarios tr {
+    border: 1px solid #757E82;
+}
+
+#verusuarios td{
+	font-size: 1.2em;
+}
+
+#verusuarios .ocultos{
+	display: table-cell;
+}
+
+
+body {
+    background: linear-gradient(#00FFCC, white);
+    background-image: cover;
+    height: 100vh;
+}
+
+h1 {
+
+    color: #FFFFFF;
+}
+
+#header {
+    background-image: linear-gradient(hsl(212, 70%, 50%), white);
+    border-radius: 8px 8px 0px 0px;
+}
+
+#content {
+    border-radius: 8px 8px 0px 0px;
+}
+
+/*Error*/
+#aviso {
+    background: #F84B4B;
+    color: #FFFFFF;
+    text-align: center;
+    margin-right: 30vw;
+    margin-left: 30vw;
+    border-radius: 8px 8px 8px 8px;
+
+
+}
+
+.paginas {
+    color: #757E82;
+    font-family: "sanssolid", sans-serif;
+}
+
+div {
+    border: none;
+}
+
+#container {
+    border: none;
+    height: 70vh;
+}
+
+#autores {
+    text-align: center;
+    color: #757E82;
+    font-size: 0.01;
+}
+	
+td input{
+     width: 15vw;
+}
+
+}
